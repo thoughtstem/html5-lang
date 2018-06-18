@@ -1,27 +1,5 @@
 #lang html5-lang
 
-;TODOs:
-
-;  Demos / Docs / Github
-;     Web:  Bootstrap! https://getbootstrap.com/docs/4.1/
-;     Mobile:  Android! (DONE!) https://www.muicss.com/docs/v1/
-
-;  Show Sara/Jason/Sonny
-
-
-;  Lesson ideas:
-;     Teach people to make their own templates
-;     Css animations.  Teach about classes...
-;     Simple JS rules: On <event> <add/remove> <css class>
-;        One page app example??
-;  Project ideas
-;     Flashcard trainer
-;     Puzzle game
-;     Interactive fiction
-;     Blog (mobile-friendly blog...)
-;     Personal website
-
-;Hello world demo!
 
 (define home
   `(html (head (title "HOME"))

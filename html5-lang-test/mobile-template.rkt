@@ -1,5 +1,7 @@
 #lang html5-lang
 
+;For CSS and HTML rules for the android template,
+;  see the docs here: https://www.muicss.com/docs/v1/
 
 (define home
   (android-template

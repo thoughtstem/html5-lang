@@ -1,5 +1,9 @@
 #lang html5-lang
 
+;For CSS and HTML rules for the bootstrap template,
+;  see the docs here: https://getbootstrap.com/docs/4.1/
+
+
 (define (my-card i b)
   `(div ([class "card"] [style "width: 18rem;"])
        (div ([class "card-img-top"]
