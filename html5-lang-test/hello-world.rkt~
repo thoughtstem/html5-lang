@@ -1,0 +1,42 @@
+#lang html5-lang
+
+;TODOs:
+;  Make layout templates for web, mobile, etc...
+;     Two for web?
+;     Two for mobile?
+
+;  Teach people to make their own templates???
+;  Decide: Bite the bullet and teach quasi-quoting and escapes??
+;     Or try to hide it all behind functions....
+
+;  QR embed! (For mobile templates...)
+;  Demos / Docs / Github
+;  Show Sara/Jason/Sonny
+
+
+
+;Hello world demo!
+
+(define home
+  `(html (head (title "HOME"))
+         (body (h1 "Home!")
+               ,(embed-image (circle 40 "solid" "green"))
+               ,(link-to "other" `(button "Click me")))))
+
+(define other
+  `(html (head (title "OTHER"))
+         (body (h1 "Other!")
+               ,(embed-image (circle 40 "solid" "red"))
+               ,(link-to "home" `(button "Click me")))))
+
+(send-to-browser
+ "home" home
+ "other" other)
+
+
+
+
+
+
+
+

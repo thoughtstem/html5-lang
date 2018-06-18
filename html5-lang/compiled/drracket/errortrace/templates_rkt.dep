@@ -1,0 +1,1 @@
+("6.9" ("585c27a10b53a3e6708e6e7c44927fb448878cb3" . "2ed95b3c346864af30155f5b2fc6a99a4faa9946") (collects #"errortrace" #"errortrace-key.rkt") (collects #"html5-lang" #"my-ip-qr.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

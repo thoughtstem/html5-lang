@@ -1,0 +1,29 @@
+#lang racket
+
+(require web-server/servlet
+         web-server/servlet-env)
+
+
+(define (not-found page-name)
+  `(html (head (title "404"))
+         (body (h1 (string-append "Sorry! Couldn't find page: " page-name)))))
+
+(define (my-app pages)
+  (define (helper req)
+    (define q (make-hash
+               (url-query
+                (request-uri req))))
+
+    (define page-name (symbol->string (hash-ref q 'page 'home)))
+  
+    (response/xexpr
+     (hash-ref
+      pages
+      page-name
+      (not-found page-name)))))
+
+
+ 
+  (serve/servlet helper
+                 #:servlet-path "/main"))
+
