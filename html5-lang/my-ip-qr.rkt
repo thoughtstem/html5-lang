@@ -4,9 +4,10 @@
 
 (require hostname
          simple-qr
-         pict
+         (only-in pict bitmap)
          net/base64
-         file/convertible)
+         file/convertible
+         scribble/html)
 
 ;; pict->data-uri : Pict -> String
 (define (pict->data-uri pict)
@@ -14,15 +15,15 @@
           (base64-encode (convert pict 'png-bytes))))
 
 (define my-ip
-    (first (get-ipv4-addrs)))
+  (first (get-ipv4-addrs)))
 
 (define (my-ip-qr-img (post-fix ""))
 
   (define my-ip-qr
     (qr-write	 	(format "http://~a:8000~a" my-ip post-fix)	 	 	 
                         "/tmp/share.png"))
-  `(div ((style "position:absolute; top:0; right:0; z-index: 1"))
-        (img ((src ,(pict->data-uri (bitmap "/tmp/share.png")))))))
+  (div style: "position:absolute; top:0; right:0; z-index: 1"
+       (img src: (pict->data-uri (bitmap "/tmp/share.png")))))
 
 
 

@@ -1,25 +1,32 @@
 (module html5-lang racket
   (provide
-          send-to-browser
-          link-to
-          embed-image
-          (all-from-out racket)
-          (all-from-out web-server/servlet)
-          (all-from-out web-server/servlet-env)
-          (all-from-out "./my-ip-qr.rkt")
-          (all-from-out "./templates.rkt")
-          (all-from-out 2htdp/image)
-           #%module-begin)
+   send-to-browser
+   link-to
+   embed-image
+   (all-from-out racket)
+   (all-from-out web-server/servlet)
+   (all-from-out web-server/servlet-env)
+   (all-from-out scribble/html)
+   (all-from-out "./my-ip-qr.rkt")
+   (all-from-out "./templates.rkt")
+   (all-from-out "./styles.rkt")
+   (all-from-out 2htdp/image)
+   #%module-begin)
 
   (require web-server/servlet
            web-server/servlet-env
-           2htdp/image
+           (except-in 2htdp/image
+                      frame)
+           scribble/html
+           (only-in xml
+                    string->xexpr)
            "./my-ip-qr.rkt"
-           "./templates.rkt")
+           "./templates.rkt"
+           "./styles.rkt")
 
   (define (not-found page-name)
-    `(html (head (title "404"))
-           (body (h1 (string-append "Sorry! Couldn't find page: " ,page-name)))))
+    (html (head (title "404"))
+          (body (h1 (string-append "Sorry! Couldn't find page: " page-name)))))
 
   (define (send-to-browser . pages-list)
     (define pages (apply hash pages-list))
@@ -32,15 +39,18 @@
       (define page-name (hash-ref q 'page "home"))
 
       (displayln (string-append "Loading page: " page-name))
+
+      (define s (with-output-to-string
+                    (thunk
+                     (output-xml
+                      (hash-ref
+                       pages
+                       page-name
+                       (not-found page-name))))))
   
       (response/xexpr
-       (hash-ref
-        pages
-        page-name
-        (not-found page-name))))
+       (string->xexpr s)))
 
-
- 
     (serve/servlet helper
                    #:port 8000
                    #:listen-ip #f
@@ -48,25 +58,25 @@
 
 
   (define (link-to p child)
-    `(a ((onclick ,(string-append "window.location = \"/main?page=" p "\"")))
-        ,child))
+    (a onclick: (string-append "window.location = \"/main?page=" p "\"")
+       child))
 
 
 
   (require 
          
-         net/base64
-         file/convertible)
+    net/base64
+    file/convertible)
   
   ;; pict->data-uri : Pict -> String
-(define (pict->data-uri pict)
-  (format "data:image/png;base64,~a"
-          (base64-encode (convert pict 'png-bytes))))
+  (define (pict->data-uri pict)
+    (format "data:image/png;base64,~a"
+            (base64-encode (convert pict 'png-bytes))))
 
 
 
   (define (embed-image i)
-    `(img ((src ,(pict->data-uri i)))))
+    (img src: (pict->data-uri i)))
 
   )
 
