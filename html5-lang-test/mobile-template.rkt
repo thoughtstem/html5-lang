@@ -6,25 +6,30 @@
 (define home
   (android-template
    #:show-qr? #t
-   `(header ([class "mui-appbar mui--z1"])
-            (div ([class "mui--appbar-height"])
-                 (div ([class "mui--text-title"])
+   (element 'header
+            class: "mui-appbar mui--z1"
+            style: (css 'background-color "red")
+            (div class: "mui--appbar-height"
+                 (div class: "mui--text-title"
                       "Home!")))
    (embed-image (circle 40 "solid" "green"))
-   `(br)
-   (link-to "other" `(button ([class "mui-btn"]) "Click me"))))
+   (br)
+   (link-to "other"
+            (button class: "mui-btn"
+                    "Click me"))))
 
 
 (define other
   (android-template
    #:show-qr? #t
-   `(header ([class "mui-appbar mui--z1"])
-            (div ([class "mui--appbar-height"])
-                 (div ([class "mui--text-title"])
+   (element 'header
+            class: "mui-appbar mui--z1"
+            (div class: "mui--appbar-height"
+                 (div class: "mui--text-title"
                       "Other page!")))
    (embed-image (circle 40 "solid" "red"))
-   `(br)
-   (link-to "home" `(button ([class "mui-btn"]) "Click me"))))
+   (br)
+   (link-to "home" (button class: "mui-btn" "Click me"))))
 
 
 (send-to-browser
