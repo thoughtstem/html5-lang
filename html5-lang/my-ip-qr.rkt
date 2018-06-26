@@ -13,13 +13,13 @@
   (format "data:image/png;base64,~a"
           (base64-encode (convert pict 'png-bytes))))
 
-(define my-ip
+(define (my-ip)
     (first (get-ipv4-addrs)))
 
 (define (my-ip-qr-img (post-fix ""))
 
   (define my-ip-qr
-    (qr-write	 	(format "http://~a:8000~a" my-ip post-fix)	 	 	 
+    (qr-write	 	(format "http://~a:8000~a" (my-ip) post-fix)	 	 	 
                         "/tmp/share.png"))
   `(div ((style "position:absolute; top:0; right:0; z-index: 1"))
         (img ((src ,(pict->data-uri (bitmap "/tmp/share.png")))))))
