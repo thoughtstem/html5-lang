@@ -14,8 +14,13 @@
   (format "data:image/png;base64,~a"
           (base64-encode (convert pict 'png-bytes))))
 
+<<<<<<< HEAD
 (define (my-ip)
     (first (get-ipv4-addrs)))
+=======
+(define my-ip
+  (first (get-ipv4-addrs)))
+>>>>>>> origin/master
 
 (define (my-ip-qr-img (post-fix ""))
 
