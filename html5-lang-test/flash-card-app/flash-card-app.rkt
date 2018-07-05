@@ -5,11 +5,16 @@
 (define cards
   (card-list
    (list "test"
-         (embed-image (overlay
+         (iframe width: (number->string (/ 560 2))
+                 height: (number->string (/ 315 2))
+                 src: "https://www.youtube.com/embed/cHJrP9qvvvI"
+                 frameborder: "0" allow: "autoplay; encrypted-media"
+                 allowfullscreen: "")
+         #;(embed-image (overlay
                        (text "TEST1?" 20 "black")
                        (circle 40 "solid" "red")))
          (embed-image (overlay
-                       (text "TEST1!" 20 "black")
+                       (text "MAN" 20 "black")
                        (circle 40 "solid" "green"))))
    (list "test2"
          (embed-image (overlay
