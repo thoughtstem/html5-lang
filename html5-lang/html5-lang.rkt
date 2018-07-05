@@ -58,7 +58,7 @@
 
 
   (define (link-to p child)
-    (a onclick: (string-append "window.location = \"/main?page=" p "\"")
+    (a style: (css 'cursor "pointer") onclick: (string-append "window.location = \"/main?page=" p "\"")
        child))
 
 
@@ -75,8 +75,8 @@
 
 
 
-  (define (embed-image i)
-    (img src: (pict->data-uri i)))
+  (define (embed-image #:class [c ""] #:style [s ""] i)
+    (img class: c style: s src: (pict->data-uri i)))
 
   )
 
